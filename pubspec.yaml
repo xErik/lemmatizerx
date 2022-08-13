@@ -1,0 +1,17 @@
+name: lemmatizerx
+description: Lemmatizer for text in English. Inspired by Python's nltk.corpus.reader.wordnet.morphy
+version: 0.0.1
+homepage: https://github.com/xErik/lemmatizer
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  test: ^1.21.1
+ 
