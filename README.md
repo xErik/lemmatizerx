@@ -2,10 +2,6 @@
 
 Lemmatizer for text in English. Inspired by Python's `nltk.corpus.reader.wordnet.morphy`.
 
-For now, it is advisable to check the quality of the results when relying on this API.
-
-Pull requests welcome.
-
 ## Installing
 
 In your pubspec.yaml:
@@ -14,7 +10,7 @@ In your pubspec.yaml:
 dependencies:
   lemmatizerx: ^0.0.1
 ```
-## Usage
+## How To Use
 
 
 ```dart
@@ -83,6 +79,11 @@ Deactivate:
 
 [POS.NOUN trees [tree], POS.VERB trees [tree]]
 ```
+## Bugs and Requests
+
+If you encounter any problems feel free to open an issue. If you feel the library is missing a feature, please raise a ticket on Github and I'll look into it. Pull request are also welcome.
+
+https://github.com/xErik/lemmatizerx/issues
 
 ## Inspirations and Sources
 

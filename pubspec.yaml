@@ -2,6 +2,7 @@ name: lemmatizerx
 description: Lemmatizer for text in English. Inspired by Python's nltk.corpus.reader.wordnet.morphy
 version: 0.0.1
 repository: https://github.com/xErik/lemmatizerx
+issue_tracker: https://github.com/xErik/lemmatizerx/issues
 
 executables:
   lemma:
