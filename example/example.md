@@ -1,5 +1,5 @@
 ```dart
-import  'package:lemmatizerx/lemmatizer.dart';
+import  'package:lemmatizerx/lemmatizerx.dart';
 
 Lemmatizer lemmatizer = Lemmatizer();
 

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:lemmatizerx/lemmatizer.dart';
+import 'package:lemmatizerx/lemmatizerx.dart';
 
 main(List<String> args) {
   if (args.isEmpty) {

@@ -1,4 +1,4 @@
-import 'package:lemmatizerx/lemmatizer.dart';
+import 'package:lemmatizerx/lemmatizerx.dart';
 
 void main() {
   Lemmatizer lemmatizer = Lemmatizer();

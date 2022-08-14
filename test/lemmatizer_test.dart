@@ -1,4 +1,4 @@
-import 'package:lemmatizerx/lemmatizer.dart';
+import 'package:lemmatizerx/lemmatizerx.dart';
 import 'package:test/test.dart';
 
 void main() {
