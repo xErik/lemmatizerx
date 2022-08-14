@@ -18,7 +18,7 @@ dependencies:
 
 
 ```dart
-import  'package:lemmatizerx/lemmatizerx.dart';
+import  'package:lemmatizerx/lemmatizer.dart';
 
 Lemmatizer lemmatizer = Lemmatizer();
 
@@ -28,9 +28,15 @@ Lemmatizer lemmatizer = Lemmatizer();
 
 Lemma lemma = lemmatizer.lemma('books', POS.NOUN);
 print(lemma.pos); // POS.NOUN
-print(lemma.form); // book
+print(lemma.form); // books
 print(lemma.lemmas); // [book]
-print(lemma); // POS.NOUN book [book]
+print(lemma); // POS.NOUN books [book]
+
+lemma = lemmatizer.lemma('loveliest', POS.ADJ);
+print(lemma.pos); // POS.ADJ
+print(lemma.form); // loveliest
+print(lemma.lemmas); // [lovely]
+print(lemma); // POS.ADJ loveliest [lovely]
 
 //
 // Lookup single lemma and fail
@@ -46,11 +52,36 @@ print(lemma.lemmasNotFound); // true
 
 List<Lemma> lemmas = lemmatizer.lemmas('meeting');
 
+print(lemmas); // [POS.NOUN meeting [meeting], POS.VERB meeting [meet]]
+
 Lemma noun = lemmas.firstWhere((lemma) => lemma.pos == POS.NOUN);
 Lemma verb = lemmas.firstWhere((lemma) => lemma.pos == POS.VERB);
 
 print(noun.lemmas); // [meeting]
 print(verb.lemmas); // [meet]
+```
+### Powershell 
+
+```ps1
+> .\bin\lemma.ps1 meeting
+
+[POS.NOUN meeting [meeting], POS.VERB meeting [meet]]
+``` 
+
+### Command line
+
+Activate:
+
+`dart pub global activate lemmatizerx`
+
+Deactivate:
+
+`dart pub global deactivate lemmatizerx`
+
+```ps1
+> lemma meeting
+
+[POS.NOUN trees [tree], POS.VERB trees [tree]]
 ```
 
 ## Inspirations and Sources

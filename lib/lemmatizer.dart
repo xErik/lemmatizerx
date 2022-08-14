@@ -195,21 +195,4 @@ class Lemmatizer {
     }
     return Lemma.notFound(formOriginal);
   }
-
-  // Lemma _eachSubstitutions(String formOriginal, String formModified, POS pos) {
-  //   List<List<String>> substitutions = MORPHOLOGICAL_SUBSTITUTIONS[pos]!;
-  //   for (var substitution in substitutions) {
-  //     String search = substitution[0];
-  //     String replace = substitution[1];
-  //     if (formOriginal.endsWith(search)) {
-  //       String cut =
-  //           formOriginal.substring(0, formOriginal.length - search.length);
-  //       Lemma res = _checkKeep(cut + replace, pos);
-  //       if (res.lemmasFound) {
-  //         return res;
-  //       }
-  //     }
-  //   }
-  //   return Lemma.notFound(formOriginal);
-  // }
 }

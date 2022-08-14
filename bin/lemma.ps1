@@ -1,1 +1,1 @@
-dart run $PSScriptRoot/cmd.dart $args[0]
+dart run $PSScriptRoot/lemma.dart $args[0]

@@ -59,18 +59,22 @@ void main() {
     expect(l.lemma('hardest', POS.ADJ).lemmas.contains('hard'), true);
   });
 
-  
   test('studies: noun verb', () {
     expect(l.lemma('studies', POS.VERB).lemmas.contains('study'), true);
     expect(l.lemma('studies', POS.NOUN).lemmas.contains('study'), true);
   });
 
-    test('better: good', () {
+  test('better: good', () {
     expect(l.lemma('better', POS.NOUN).lemmas.contains('better'), true);
     expect(l.lemma('better', POS.VERB).lemmas.contains('better'), true);
     expect(l.lemma('better', POS.ADJ).lemmas.contains('good'), true);
     expect(l.lemma('better', POS.ADJ).lemmas.contains('well'), true);
     expect(l.lemma('better', POS.ADV).lemmas.contains('well'), true);
   });
+
+  test('lovely: adjective', () {
+    expect(l.lemma('lovely', POS.ADJ).lemmas.contains('lovely'), true);
+    expect(l.lemma('lovelier', POS.ADJ).lemmas.contains('lovely'), true);
+    expect(l.lemma('loveliest', POS.ADJ).lemmas.contains('lovely'), true);
+  });
 }
- 
