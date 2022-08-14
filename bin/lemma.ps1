@@ -1,0 +1,1 @@
+dart run $PSScriptRoot/cmd.dart $args[0]

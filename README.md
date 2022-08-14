@@ -14,7 +14,7 @@ In your pubspec.yaml:
 dependencies:
   lemmatizerx: ^0.0.1
 ```
-## Basic Usage
+## Usage
 
 
 ```dart

@@ -14,9 +14,9 @@ class Lemma {
   List<String> lemmas = [];
   Lemma(this.pos, this.form, this.lemmas);
   Lemma.notFound(this.form);
-  Lemma.notChange(this.pos, this.form) {
-    lemmas.add(form);
-  }
+  // Lemma.notChange(this.pos, this.form) {
+  //   lemmas.add(form);
+  // }
 
   // Returns whether there a single lemma and is it the same as
   // the supplied form (word).
@@ -112,78 +112,104 @@ class Lemmatizer {
     if (pos == POS.UNKNOWN) {
       throw 'Illegal parameter: ${pos.name}';
     }
-    return _eachLemma(form, pos);
+    form = form.toLowerCase();
+    return _checkReplacement(form, form, pos);
   }
 
-  Lemma _eachLemma(String form, POS pos) {
+  Lemma _checkReplacement(String formOriginal, String formModified, POS pos) {
     // exception = replacePOS
     switch (pos) {
       case POS.NOUN:
-        if (LemmaHelper.hasReplaceNouns(form)) {
-          return Lemma(POS.NOUN, form, LemmaHelper.getReplaceNouns(form));
+        if (LemmaHelper.hasReplaceNouns(formModified)) {
+          return Lemma(POS.NOUN, formOriginal,
+              LemmaHelper.getReplaceNouns(formModified));
         }
         break;
       case POS.VERB:
-        if (LemmaHelper.hasReplaceVerbs(form)) {
-          return Lemma(POS.VERB, form, LemmaHelper.getReplaceVerbs(form));
+        if (LemmaHelper.hasReplaceVerbs(formModified)) {
+          return Lemma(POS.VERB, formOriginal,
+              LemmaHelper.getReplaceVerbs(formModified));
         }
         break;
       case POS.ADJ:
-        if (LemmaHelper.hasReplaceAdjectives(form)) {
-          return Lemma(POS.ADJ, form, LemmaHelper.getReplaceAdjectives(form));
+        if (LemmaHelper.hasReplaceAdjectives(formModified)) {
+          return Lemma(POS.ADJ, formOriginal,
+              LemmaHelper.getReplaceAdjectives(formModified));
         }
         break;
       case POS.ADV:
-        if (LemmaHelper.hasReplaceAdverbs(form)) {
-          return Lemma(POS.ADV, form, LemmaHelper.getReplaceAdverbs(form));
+        if (LemmaHelper.hasReplaceAdverbs(formModified)) {
+          return Lemma(POS.ADV, formOriginal,
+              LemmaHelper.getReplaceAdverbs(formModified));
         }
         break;
       default:
       // do nothing
     }
 
-    return _eachSubstitutions(form, pos);
+    return _checkKeep(formOriginal, formModified, pos);
   }
 
-  Lemma _eachSubstitutions(String form, POS pos) {
+  Lemma _checkKeep(String formOriginal, String formModified, POS pos) {
     // index = keepPOS
     switch (pos) {
       case POS.NOUN:
-        if (LemmaHelper.hasKeepNouns(form)) {
-          return Lemma.notChange(POS.NOUN, form);
+        if (LemmaHelper.hasKeepNouns(formModified)) {
+          return Lemma(POS.NOUN, formOriginal, [formModified]);
         }
         break;
       case POS.VERB:
-        if (LemmaHelper.hasKeepVerbs(form)) {
-          return Lemma.notChange(POS.VERB, form);
+        if (LemmaHelper.hasKeepVerbs(formModified)) {
+          return Lemma(POS.VERB, formOriginal, [formModified]);
         }
         break;
       case POS.ADJ:
-        if (LemmaHelper.hasKeepAdjectives(form)) {
-          return Lemma.notChange(POS.ADJ, form);
+        if (LemmaHelper.hasKeepAdjectives(formModified)) {
+          return Lemma(POS.ADJ, formOriginal, [formModified]);
         }
         break;
       case POS.ADV:
-        if (LemmaHelper.hasKeepAdverbs(form)) {
-          return Lemma.notChange(POS.ADV, form);
+        if (LemmaHelper.hasKeepAdverbs(formModified)) {
+          return Lemma(POS.ADV, formOriginal, [formModified]);
         }
         break;
       default:
       // do nothing
     }
+    return _eachSubstitutions(formOriginal, formModified, pos);
+  }
 
+  Lemma _eachSubstitutions(String formOriginal, String formModified, POS pos) {
     List<List<String>> substitutions = MORPHOLOGICAL_SUBSTITUTIONS[pos]!;
     for (var substitution in substitutions) {
       String search = substitution[0];
       String replace = substitution[1];
-      if (form.endsWith(search)) {
-        String cut = form.substring(0, form.length - search.length);
-        Lemma res = _eachSubstitutions(cut + replace, pos);
+      if (formModified.endsWith(search)) {
+        String cut =
+            formModified.substring(0, formModified.length - search.length);
+        Lemma res = _checkKeep(formOriginal, cut + replace, pos);
         if (res.lemmasFound) {
           return res;
         }
       }
     }
-    return Lemma.notFound(form);
+    return Lemma.notFound(formOriginal);
   }
+
+  // Lemma _eachSubstitutions(String formOriginal, String formModified, POS pos) {
+  //   List<List<String>> substitutions = MORPHOLOGICAL_SUBSTITUTIONS[pos]!;
+  //   for (var substitution in substitutions) {
+  //     String search = substitution[0];
+  //     String replace = substitution[1];
+  //     if (formOriginal.endsWith(search)) {
+  //       String cut =
+  //           formOriginal.substring(0, formOriginal.length - search.length);
+  //       Lemma res = _checkKeep(cut + replace, pos);
+  //       if (res.lemmasFound) {
+  //         return res;
+  //       }
+  //     }
+  //   }
+  //   return Lemma.notFound(formOriginal);
+  // }
 }

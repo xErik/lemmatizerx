@@ -10,11 +10,13 @@ void main() {
     var verb = lemmas.firstWhere((lemma) => lemma.pos == POS.VERB);
     expect(noun.lemmas.contains('meeting'), true);
     expect(verb.lemmas.contains('meet'), true);
+    expect(verb.form, 'meeting');
   });
 
   test('feet: noun', () {
     expect(l.lemma('feet', POS.NOUN).lemmas.contains('foot'), true);
     expect(l.lemma('feet', POS.NOUN).pos == POS.NOUN, true);
+    expect(l.lemma('feet', POS.NOUN).form, 'feet');
   });
 
   test('feet: adjective', () {
@@ -56,4 +58,19 @@ void main() {
     expect(l.lemma('hardest', POS.ADV).lemmas.contains('hard'), true);
     expect(l.lemma('hardest', POS.ADJ).lemmas.contains('hard'), true);
   });
+
+  
+  test('studies: noun verb', () {
+    expect(l.lemma('studies', POS.VERB).lemmas.contains('study'), true);
+    expect(l.lemma('studies', POS.NOUN).lemmas.contains('study'), true);
+  });
+
+    test('better: good', () {
+    expect(l.lemma('better', POS.NOUN).lemmas.contains('better'), true);
+    expect(l.lemma('better', POS.VERB).lemmas.contains('better'), true);
+    expect(l.lemma('better', POS.ADJ).lemmas.contains('good'), true);
+    expect(l.lemma('better', POS.ADJ).lemmas.contains('well'), true);
+    expect(l.lemma('better', POS.ADV).lemmas.contains('well'), true);
+  });
 }
+ 
